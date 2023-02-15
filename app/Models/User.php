@@ -20,5 +20,10 @@ class User extends Model
         return $this->hasMany(Article::class, 'article_id', 'id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'comment_id', 'id');
+    }
+
 
 }
