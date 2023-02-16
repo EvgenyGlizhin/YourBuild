@@ -10,20 +10,24 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use  HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
 
-    public function articles()
-    {
-        return $this->hasMany(Article::class, 'article_id', 'id');
-    }
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'comment_id', 'id');
-    }
+    protected $hidden = [
+        'password',
+        'is_admin',
+        'remember_token',
+    ];
 
-
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }
