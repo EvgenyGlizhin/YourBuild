@@ -17,10 +17,11 @@ return new class extends Migration {
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('registration_date')->useCurrent();
             $table->boolean('is_admin')->default(0);
+            $table->rememberToken();
             $table->softDeletes();
-
         });
     }
 
