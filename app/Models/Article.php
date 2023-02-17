@@ -12,13 +12,13 @@ class Article extends Model
     protected $table = 'articles';
     protected $guarded = false;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'article_tags', 'article_id', 'tag_id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'comment_id', 'id');
     }
 }
