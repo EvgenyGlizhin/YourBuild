@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
-            $table->timestamp('crated_at');
-            $table->timestamp('updated_at');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('article_id')->nullable();
+            $table->string('text', '4000');
+            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('article_id');
 
             $table->index('user_id', 'comment_user_idx');
             $table->index('article_id', 'comment_article_idx');
