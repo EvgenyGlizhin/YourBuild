@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Comment extends Model
 {
     use HasFactory;
 
-    protected $table = 'articles';
+    protected $table = 'comments';
     protected $guarded = false;
 
     public function user()
@@ -17,13 +17,8 @@ class Article extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function tags()
+    public function article()
     {
-        return $this->belongsToMany(Tag::class, 'article_tags', 'article_id', 'tag_id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'article_id', 'id');
+        return $this->belongsTo(Article::class, 'article_id', 'id');
     }
 }
