@@ -12,32 +12,37 @@ class CalculatorController extends Controller
         $sourceWidth = 3.5;
         $sourceHeight = 2.7;
 
-        $wallPaper = '1'; //Заменить числа выбором материала из формы
-        $laminate = '0';
-        $paint = '0';
-        $tile = '0';
+        $wallPaper = 1; //Заменить числа выбором материала из формы
+        $laminate = 0;
+        $paint = 0;
+        $tile = 0;
+
+        define('bandWallPaperInRollWithImage', 3);
+        define('bandWallPaperInRollWithoutImage', 3.5);
+        define('areaOneBordLaminate', 0.22);
+        define('kgPaintOneSquareMeter', 0.180);
 
         $areaFloor = $sourceLength * $sourceWidth;
         $lengthWalls = ($sourceLength * 2) + ($sourceWidth * 2);
         $areaWalls = $lengthWalls * $sourceHeight;
 
-        if ($wallPaper == '1') {
-            $rollsWallPaperSelection = $lengthWalls / '3';
-            $rollsWallPaperWithoutSelection = $lengthWalls / '3.5';
+        if ($wallPaper === 1) {
+            $rollsWallPaperSelection = $lengthWalls / bandWallPaperInRollWithImage;
+            $rollsWallPaperWithoutSelection = $lengthWalls / bandWallPaperInRollWithoutImage;
             $finishCalculation = ('С подбором рисунка ' . mb_substr($rollsWallPaperSelection, 0, 4) . ', ' . 'Без подбора рисунка ' . mb_substr($rollsWallPaperWithoutSelection, 0, 4));
         }
-        if ($laminate == '1') {
-            $countLaminate = $areaFloor / '0.22';
+        elseif ($laminate === 1) {
+            $countLaminate = $areaFloor / areaOneBordLaminate;
             $stockLaminate = ($countLaminate / '100') * '10';
             $countLaminateWithStock = $countLaminate + $stockLaminate;
             $finishCalculation = ('Вам нужно ' . mb_substr($countLaminateWithStock, 0, 4) . ' планок ламината размером 1380мм на 159мм . С учётом запаса 10%');
         }
-        if ($paint == '1') {
-            $paintForCeiling = $areaFloor * '0.175';
+        elseif ($paint === 1) {
+            $paintForCeiling = $areaFloor * kgPaintOneSquareMeter;
             $paintForWall = $areaWalls * '0.175';
             $finishCalculation = ('Для потолка на один слой нужно ' . mb_substr($paintForCeiling, 0, 4) . ' кг. краски. Для стен на один слой нужно ' . mb_substr($paintForWall, 0, 4) . 'кг. краски.');
         }
-        if ($tile == '1') {
+        elseif ($tile === 1) {
             $stockTileFloor = ($areaFloor / 100) * 10;
             $tileForFloor = $areaFloor + $stockTileFloor;
             $stockTileWalls = ($areaWalls / 100) * 10;
