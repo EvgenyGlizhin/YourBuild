@@ -5,25 +5,49 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <title>Document</title>
-    @vite(['resources/js/app.js'])
+    <title>{{ config('app.name', 'Главная') }}</title>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header>
     <div class="about">
         <div class="row col-12 bg-secondary">
             <ul class="nav justify-content-end">
-                <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
-                    <a class="nav-link link-dark" href="{{ route('register') }}">
-                        <h4 class="display-10">Log in</h4>
-                    </a>
-                </li>
-                <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
-                    <a class="nav-link link-dark" href="{{ route('login') }}">
-                        <h4 class="display-10">Sing in</h4>
-                    </a>
-                </li>
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
+                            <a class="nav-link link-dark" href="{{ route('register') }}">
+                                <h4 class="display-10">Log in</h4>
+                            </a>
+                        </li>
+                    @endif
+                    @if (Route::has('register'))
+                        <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
+                            <a class="nav-link link-dark" href="{{ route('login') }}">
+                                <h4 class="display-10">Sing in</h4>
+                            </a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item mt-md-3">
+                    <h4 class="display-10">
+                        {{ Auth::user()->name }}
+                    </h4>
+                    </li>
+                    <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
+                        <a class="nav-link link-dark" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <h4 class="display-10">{{ __('Logout') }}</h4>
+                        </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endguest
             </ul>
         </div>
 
