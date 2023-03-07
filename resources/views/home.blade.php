@@ -17,6 +17,11 @@
                     {{ __('Вы вошли на сайт!') }}
                 </div>
             </div>
+            <div class="mt-2">
+                <a href="{{route('article')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button" aria-disabled="true">
+                    Добавить статью
+                </a>
+            </div>
         </div>
     </div>
 </div>
