@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Tag\StoreRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -18,12 +19,10 @@ class TagController extends Controller
         return view('tags');
     }
 
-    public function store()
+    public function store(StoreRequest $request)
     {
-        $tagTitle = request()->validate([
-            'title' => ['required', 'unique:tags', 'max:20', 'regex:/^([^0-9]*)$/']
-        ]);
-        Tag::Create(['title' => $tagTitle['title']]);
+        $tagCreate = $request->validated();
+        Tag::create(['title' => $tagCreate['title']]);
         return redirect()->route('home');
     }
 }
