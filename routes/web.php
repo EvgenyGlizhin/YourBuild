@@ -26,6 +26,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/article', [App\Http\Controllers\ArticleController::class, 'create'])->name('article');
+Route::get('/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tag.create');
 
-Route::post('/article', [App\Http\Controllers\ArticleController::class, 'store'])->name('store');
+Route::post('/tags', [App\Http\Controllers\TagController::class, 'store'])->name('tag.store');
+
+Route::get('/article', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
+
+Route::post('/article', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');

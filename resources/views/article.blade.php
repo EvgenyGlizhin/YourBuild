@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h1 class="text-center">Создать статью</h1>
-                <form action="{{route('store')}}" method="post">
+                <form action="{{route('article.store')}}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Заголовок статьи</label>
