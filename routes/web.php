@@ -25,3 +25,7 @@ Route::get('/welcome', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tags');
+
+Route::post('/tags', [App\Http\Controllers\TagController::class, 'store'])->name('store');
