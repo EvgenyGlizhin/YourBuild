@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'title' => ['required', 'max:255', 'regex:/^([^0-9]*)$/'],
             'text' => ['required', 'max:60000'],
-            'image_url' => ['required', 'max:2000']
+            'image_url' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2000']
         ];
     }
 }

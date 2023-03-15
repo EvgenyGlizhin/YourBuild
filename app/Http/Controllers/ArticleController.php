@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Article\StoreRequest;
 use App\Models\Article;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -19,9 +20,14 @@ class ArticleController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $articleCreate = $request->validated();
-        $articleCreate['user_id'] = auth()->user()->id;
-        Article::create($articleCreate);
+        $articleElementsToCreate = $request->validated();
+
+        $imagePath = $request->file('image_url')->store('uploads', 'public');
+
+        $articleElementsToCreate['image_url'] = $imagePath;
+        $articleElementsToCreate['user_id'] = auth()->user()->id;
+
+        Article::create($articleElementsToCreate);
         return redirect('home');
     }
 }

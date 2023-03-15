@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h1 class="text-center">Создать статью</h1>
-                <form action="{{route('article.store')}}" method="post">
+                <form action="{{route('article.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Заголовок статьи</label>
@@ -37,7 +37,7 @@
                         <input type="file" name="image_url" class="form-control" id="image_url"/>
                         @error('image_url')
                         <div class="alert alert-danger mt-3" role="alert">
-                            Файл не выбран
+                            Файл не выбран или не является картинкой
                         </div>
                         @enderror()
                     </div>
