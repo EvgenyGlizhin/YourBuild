@@ -16,11 +16,21 @@
                         {{ __('Вы вошли на сайт!') }}
                     </div>
                 </div>
-                <div class="mt-2">
-                    <a href="{{route('tags')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button" aria-disabled="true">
+                <div class="col-4 mt-2">
+                    <a href="{{route('tag.create')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                       aria-disabled="true">
                         Добавить тег
                     </a>
                 </div>
+
+
+                <div class="col-4 mt-2">
+                    <a href="{{route('article.create')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                       aria-disabled="true">
+                        Добавить статью
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>

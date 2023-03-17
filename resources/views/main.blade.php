@@ -4,7 +4,7 @@
         <div class="container">
             <div class="mt-4 ml text-center">
                 <img width="1400px" height="170px"
-                     src="https://abrakadabra.fun/uploads/posts/2022-02/1643676064_10-abrakadabra-fun-p-fon-stroitelstvo-i-remont-13.jpg"
+                     src="{{asset('/storage/uploads/main_photo.jpg')}}"
                      alt="...">
             </div>
             <div class="row">

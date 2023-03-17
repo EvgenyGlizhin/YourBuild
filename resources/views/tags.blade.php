@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="">
-                    <form action="{{route('store')}}" method="post">
+                    <form action="{{route('tag.store')}}" method="post">
                         @csrf
                         <div class="mb-3">
                             <label for="title" class="form-label">Ведите название тега</label>
