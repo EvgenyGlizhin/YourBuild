@@ -18,7 +18,7 @@
                                     <h5 class="card-title">{{$article->title}}</h5>
                                     <p class="card-text" style="max-width: 400em; max-height: 50em;">{{$article->text}}</p>
                                     <img src="{{asset('/storage/uploads/alarm.svg')}}" alt="">
-                                    <span class="m-lg-3">{{substr($article->created_at, 0, 10)}}</span>
+                                    <span class="m-lg-3">{{$article->created_at->toDateString()}}</span>
                                     <img class="" src="{{asset('/storage/uploads/person-circle.svg')}}" alt="">
                                     <span class="m-lg-3">{{$article->name}}</span>
                                     <a href="#" class="btn btn-primary">Открыть статью</a>
