@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('main');
+});
+
+Route::get('/welcome', function () {
     return view('welcome');
 });
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tag.create');
+
+Route::post('/tags', [App\Http\Controllers\TagController::class, 'store'])->name('tag.store');
+
+Route::get('/article', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
+
+Route::post('/article', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
+
 Route::post('/calculator', 'App\Http\Controllers\CalculatorController@index');
