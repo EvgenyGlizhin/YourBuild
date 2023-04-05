@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="{{ asset('plugins/jquery.js') }}"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
     <title>{{ config('app.name', 'Главная') }}</title>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/ajaxCalculatorMaterials.js'])
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header>
@@ -53,9 +54,7 @@
 
     </div>
 </header>
-
 @yield('content')
-
 <footer class="mt-auto">
     <nav class="navbar navbar-dark bg-secondary">
         <div class="col-12 text-center">

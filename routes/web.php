@@ -35,4 +35,7 @@ Route::get('/article', [App\Http\Controllers\ArticleController::class, 'create']
 
 Route::post('/article', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
 
-Route::post('/calculator', 'App\Http\Controllers\CalculatorController@index');
+Route::get('/calculator', [App\Http\Controllers\CalculatorController::class,'index'])->name('calculator.materials.index');
+
+Route::post('/calculator', [App\Http\Controllers\CalculatorController::class,'calculate'])->name('calculator.materials.calculate');
+
