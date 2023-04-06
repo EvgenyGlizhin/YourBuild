@@ -30,4 +30,18 @@ class CalculatorMaterialsRequest extends FormRequest
             'category' => ['required', 'string'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'length.required' => 'Это поле должно быть заполнено',
+            'length.numeric' => 'Это поле должно быль заполнено числом',
+            'width.required' => 'Это поле должно быть заполнено',
+            'width.numeric' => 'Это поле должно быль заполнено числом',
+            'height.required' => 'Это поле должно быть заполнено',
+            'height.numeric' => 'Это поле должно быль заполнено числом',
+            'category.required' => 'Выберите категорию',
+            'category.string' => 'Поле должно быть строкой'
+        ];
+    }
 }
