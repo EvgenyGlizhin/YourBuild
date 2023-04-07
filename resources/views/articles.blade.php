@@ -20,7 +20,7 @@
                                     <img src="{{asset('/storage/uploads/alarm.svg')}}" alt="">
                                     <span class="m-lg-3">{{$article->created_at->toDateString()}}</span>
                                     <img class="" src="{{asset('/storage/uploads/person-circle.svg')}}" alt="">
-                                    <span class="m-lg-3">{{$article->name}}</span>
+                                    <span class="m-lg-3">{{$article->user->name}}</span>
                                     <a href="#" class="btn btn-primary">Открыть статью</a>
                                 </div>
                             </div>
@@ -28,7 +28,10 @@
                         </div>
                     </div>
                 @endforeach
-                <a class="btn btn-primary m-lg-3" href="{{ URL::to('/home') }}">Вернуться на главную</a>
+                    <div class="pagination">
+                        {{ $articles->links() }}
+                    </div>
+                    <a class="btn btn-primary m-lg-3" href="{{ URL::to('/home') }}">Вернуться на главную</a>
             </div>
         </div>
     </div>

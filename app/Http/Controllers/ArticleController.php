@@ -38,14 +38,19 @@ class ArticleController extends Controller
         SELECT a.title, SUBSTR(text, 1, 500) AS text, a.image_url, a.created_at, a.user_id, u.name
         FROM articles AS a
         JOIN users AS u
-        WHERE a.user_id = u.id
+        ON a.user_id = u.id
         ORDER BY a.created_at DESC
-        LIMIT 20
+        LIMIT 20 OFFSET 0 // или OFFSET 20, 40 для второй и третьей страницы
+         *
+         * На чистом php, чтобы это происходило динамически нужно добавить код.
+        LIMIT . '$perPage' . OFFSET . '$offset';
+        $perPage = 20;
+        $currentPage = $_GET['page'] ?? 1;
+        $offset = ($currentPage - 1) * $perPage;
          */
         $articles = Article::with('user')
-            ->select('articles.title', 'articles.text','articles.image_url','articles.created_at','articles.user_id', 'users.name')
+            ->select('title', 'text', 'image_url', 'created_at', 'user_id')
             ->selectRaw('SUBSTR(text, 1, 500) AS text')
-            ->join('users', 'articles.user_id', '=', 'users.id')
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
