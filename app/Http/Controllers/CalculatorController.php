@@ -14,10 +14,10 @@ class CalculatorController extends Controller
 
     public function calculate(CalculatorMaterialsRequest $request, CalculatorMaterials $calculator)
     {
-        $length = $request->input('length');
-        $width = $request->input('width');
-        $height = $request->input('height');
-        $category = $request->input('category');
+        $length = $request->getLength();
+        $width = $request->getWidth();
+        $height = $request->getHeight();
+        $category = $request->getCategory();
         $resultCalculate = $calculator->calculate($length, $width, $height, $category);
 
         return response()->json(['category' => $category, 'resultCalculate' => $resultCalculate]);

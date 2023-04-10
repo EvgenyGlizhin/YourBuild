@@ -30,6 +30,23 @@ class CalculatorMaterialsRequest extends FormRequest
             'category' => ['required', 'string'],
         ];
     }
+    public function getLength()
+    {
+        return $this->input('length');
+    }
+    public function getWidth()
+    {
+        return $this->input('width');
+    }
+    public function getHeight()
+    {
+        return $this->input('height');
+    }
+    public function getCategory()
+    {
+        return $this->input('category');
+    }
+
 
     public function messages()
     {
