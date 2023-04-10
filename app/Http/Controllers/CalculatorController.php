@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Calculators\CalculatorMaterials;
+use App\Http\Calculators\MaterialsCalculator;
 use App\Http\Requests\Calculator\CalculatorMaterialsRequest;
 
 class CalculatorController extends Controller
@@ -12,7 +12,7 @@ class CalculatorController extends Controller
         return view('calculatorMaterials');
     }
 
-    public function calculate(CalculatorMaterialsRequest $request, CalculatorMaterials $calculator)
+    public function calculate(CalculatorMaterialsRequest $request, MaterialsCalculator $calculator)
     {
         $length = $request->getLength();
         $width = $request->getWidth();
