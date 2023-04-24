@@ -22,6 +22,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -35,3 +36,8 @@ Route::get('/article/create', [App\Http\Controllers\ArticleController::class, 'c
 Route::post('/article/store', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
 
 Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
+
+Route::get('/calculator', [App\Http\Controllers\CalculatorController::class,'index'])->name('calculator.materials.index');
+
+Route::post('/calculator', [App\Http\Controllers\CalculatorController::class,'calculate'])->name('calculator.materials.calculate');
+
