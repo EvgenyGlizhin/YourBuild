@@ -27,13 +27,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tag.create');
+Route::get('/tag/create', [App\Http\Controllers\TagController::class, 'create'])->name('tag.create');
 
-Route::post('/tags', [App\Http\Controllers\TagController::class, 'store'])->name('tag.store');
+Route::post('/tag/store', [App\Http\Controllers\TagController::class, 'store'])->name('tag.store');
 
-Route::get('/article', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
+Route::get('/article/create', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
 
-Route::post('/article', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
+Route::post('/article/store', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
+
+Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 
 Route::get('/calculator', [App\Http\Controllers\CalculatorController::class,'index'])->name('calculator.materials.index');
 

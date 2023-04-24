@@ -37,6 +37,13 @@
                     </a>
                 </div>
 
+                <div class="col-4 mt-2">
+                    <a href="{{route('articles.index')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                       aria-disabled="true">
+                        Посмотреть все статьи
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
