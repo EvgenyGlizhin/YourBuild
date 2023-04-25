@@ -21,7 +21,7 @@
                                     <span class="m-lg-3">{{$article->created_at->toDateString()}}</span>
                                     <img class="" src="{{asset('/storage/uploads/person-circle.svg')}}" alt="">
                                     <span class="m-lg-3">{{$article->user->name}}</span>
-                                    <a href="#" class="btn btn-primary">Открыть статью</a>
+                                    <a href="{{route('article.show', $article->id)}}" class="btn btn-primary">Открыть статью</a>
                                 </div>
                             </div>
                             </div>
