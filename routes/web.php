@@ -35,9 +35,13 @@ Route::get('/article/create', [App\Http\Controllers\ArticleController::class, 'c
 
 Route::post('/article/store', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
 
+Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class, 'show'])->name('article.show');
+
 Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 
 Route::get('/calculator', [App\Http\Controllers\CalculatorController::class,'index'])->name('calculator.materials.index');
 
 Route::post('/calculator', [App\Http\Controllers\CalculatorController::class,'calculate'])->name('calculator.materials.calculate');
+
+Route::post('/comment/store', [App\Http\Controllers\CommentController::class,'store'])->name('comment.store');
 

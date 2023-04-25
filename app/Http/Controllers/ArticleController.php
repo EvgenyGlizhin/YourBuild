@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Article\StoreRequest;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('article');
+        return view('articles.create');
     }
 
     public function store(StoreRequest $request)
@@ -49,11 +50,16 @@ class ArticleController extends Controller
         $offset = ($currentPage - 1) * $perPage;
          */
         $articles = Article::with('user')
-            ->select('title', 'text', 'image_url', 'created_at', 'user_id')
+            ->select('id', 'title', 'text', 'image_url', 'created_at', 'user_id')
             ->selectRaw('SUBSTR(text, 1, 500) AS text')
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
-        return view('articles', ['articles' => $articles]);
+        return view('articles.index', ['articles' => $articles]);
+    }
+
+    public function show(Article $article)
+    {
+        return view('articles.show', compact('article'));
     }
 }
