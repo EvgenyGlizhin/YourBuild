@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
+    public function emails()
+    {
+        return $this->hasMany(Email::class, 'user_id', 'id');
+    }
 }
