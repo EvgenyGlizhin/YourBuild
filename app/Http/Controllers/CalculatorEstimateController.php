@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Calculators\EstimateCalculator;
+use App\Http\Calculators\EstimateCalculator\ListOfCalculators;
 use App\Http\Requests\Calculator\CalculatorEstimateRequest;
-use App\Models\Email;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\EstimateMail;
+use App\Service\MailService;
 
 class CalculatorEstimateController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,7 +19,7 @@ class CalculatorEstimateController extends Controller
         return view('calculators.calculatorEstimate');
     }
 
-    public function calculate(CalculatorEstimateRequest $request, EstimateCalculator $calculator)
+    public function calculate(CalculatorEstimateRequest $request, MailService $service, ListOfCalculators $listOfCalculators)
     {
         $length = $request->getLength();
         $width = $request->getWidth();
@@ -29,23 +28,13 @@ class CalculatorEstimateController extends Controller
         $email = $request->getEmail();
         $approveSaveEmail = $request->getApproveSaveEmail();
 
-        $resultCalculate = $calculator->calculate($length, $width, $height, $category);
-        $estimateData = [
-            'category' => $category,
-            'length' => $length,
-            'width' => $width,
-            'height' => $height,
-            'resultCalculate' => $resultCalculate
-        ];
-        Mail::to($email)->send(new EstimateMail($estimateData));
 
-        if($approveSaveEmail === 'true'){
-            $dataForSaveEmail['email'] = $email;
-            $dataForSaveEmail['user_id'] = auth()->user()->id;
-            Email::firstOrCreate($dataForSaveEmail);
-        }
+        $arrCategoryCalculators = $listOfCalculators->calculators();
+        $calculatorSelectionCategory = $arrCategoryCalculators[$category];
+        $resultCalculate = $calculatorSelectionCategory->calculate($length, $width, $height);
 
-        $successfulMailOperation = 'Данные успешно отправлены!';
-        return view('calculators.calculatorEstimate', compact('successfulMailOperation'));
+        $successfulSendMail = $service->sendEmail($category, $length,$width, $height, $email, $resultCalculate, $approveSaveEmail);
+
+        return view('calculators.calculatorEstimate', compact('successfulSendMail'));
     }
 }

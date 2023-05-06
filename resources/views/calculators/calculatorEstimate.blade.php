@@ -73,9 +73,9 @@
                         <button type="submit" class="btn btn-primary btn-lg">Провести расчёт и отправить</button>
                     </div>
                 </form>
-                @if(isset($successfulMailOperation))
+                @if(isset($successfulSendMail))
                 <div class="mt-3 text-center">
-                    <h3>{{$successfulMailOperation}}</h3>
+                    <h3>{{$successfulSendMail}}</h3>
                 </div>
                 @endif
                 <a class="btn btn-primary m-lg-3" href="{{ URL::to('/home') }}">Вернуться на главную</a>
