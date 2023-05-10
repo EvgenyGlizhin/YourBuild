@@ -4,7 +4,7 @@ namespace App\Http\Calculators\EstimateCalculator;
 
 abstract class AbstractEstimateCalculator
 {
-    //When creating a successor, do not forget to add it to ListOfCalculators
+    // When creating a successor, do not forget to add it to FactoryCalculatorEstimate
 
     abstract public function getDollarPricePerSquireMeter(): float;
     abstract public function calculate(float $length, float $width, float $height): float;

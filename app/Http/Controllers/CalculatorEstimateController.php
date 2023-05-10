@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Calculators\EstimateCalculator\ListOfCalculators;
+use App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator\FactoryCalculatorInterface;
 use App\Http\Requests\Calculator\CalculatorEstimateRequest;
 use App\Service\MailService;
 
@@ -19,7 +19,7 @@ class CalculatorEstimateController extends Controller
         return view('calculators.calculatorEstimate');
     }
 
-    public function calculate(CalculatorEstimateRequest $request, MailService $service, ListOfCalculators $listOfCalculators)
+    public function calculate(CalculatorEstimateRequest $request, MailService $service, FactoryCalculatorInterface $factory)
     {
         $length = $request->getLength();
         $width = $request->getWidth();
@@ -28,10 +28,8 @@ class CalculatorEstimateController extends Controller
         $email = $request->getEmail();
         $approveSaveEmail = $request->getApproveSaveEmail();
 
-
-        $arrCategoryCalculators = $listOfCalculators->calculators();
-        $calculatorSelectionCategory = $arrCategoryCalculators[$category];
-        $resultCalculate = $calculatorSelectionCategory->calculate($length, $width, $height);
+        $calculator = $factory->createCalculator($category);
+        $resultCalculate = $calculator->calculate($length, $width, $height);
 
         $successfulSendMail = $service->sendEmail($category, $length,$width, $height, $email, $resultCalculate, $approveSaveEmail);
 
