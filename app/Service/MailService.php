@@ -3,12 +3,12 @@
 namespace App\Service;
 
 use App\Mail\EstimateMail;
-use App\Models\Email;
+use App\Models\EmailForSendingMessages;
 use Illuminate\Support\Facades\Mail;
 
 class MailService
 {
-    public function sendEmail($category, $length, $width, $height, $email, $resultCalculate, $approveSaveEmail)
+    public function sendEstimateEmail(string $category, float $length, float $width, float $height, string $email, float $resultCalculate, bool $isApprovedEmailSaving)
     {
         $estimateData = [
             'category' => $category,
@@ -17,13 +17,17 @@ class MailService
             'height' => $height,
             'resultCalculate' => $resultCalculate
         ];
-        Mail::to($email)->send(new EstimateMail($estimateData));
+        try {
+            Mail::to($email)->send(new EstimateMail($estimateData));
 
-        if($approveSaveEmail === 'true'){
-            $dataForSaveEmail['email'] = $email;
-            $dataForSaveEmail['user_id'] = auth()->user()->id;
-            Email::firstOrCreate($dataForSaveEmail);
+            if ($isApprovedEmailSaving === true) {
+                $dataForSaveEmail['email'] = $email;
+                $dataForSaveEmail['user_id'] = auth()->user()->id;
+                EmailForSendingMessages::firstOrCreate($dataForSaveEmail);
+            }
+            return 'Данные успешно отправлены!';
+        } catch (\Exception) {
+            return 'Ошибка отправки письма';
         }
-        return 'Данные успешно отправлены!';
     }
 }

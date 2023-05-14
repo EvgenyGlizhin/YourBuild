@@ -43,6 +43,6 @@ class User extends Authenticatable
     }
     public function emails()
     {
-        return $this->hasMany(Email::class, 'user_id', 'id');
+        return $this->hasMany(EmailForSendingMessages::class, 'user_id', 'id');
     }
 }

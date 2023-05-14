@@ -32,27 +32,27 @@ class CalculatorEstimateRequest extends FormRequest
             'approveSaveEmail' => ['required', 'string']
         ];
     }
-    public function getLength()
+    public function getLength() : float
     {
         return $this->input('length');
     }
-    public function getWidth()
+    public function getWidth() : float
     {
         return $this->input('width');
     }
-    public function getHeight()
+    public function getHeight() : float
     {
         return $this->input('height');
     }
-    public function getCategory()
+    public function getCategory() : string
     {
         return $this->input('category');
     }
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->input('email');
     }
-    public function getApproveSaveEmail()
+    public function isApprovedEmailSaving() : bool
     {
         return $this->input('approveSaveEmail');
     }

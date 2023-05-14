@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator\FactoryCalculatorEstimate;
-use App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator\FactoryCalculatorInterface;
+use App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator\EstimateCalculatorFactory;
+use App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator\InterfaceCalculatorFactory;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(FactoryCalculatorInterface::class, FactoryCalculatorEstimate::class);
+        $this->app->bind(InterfaceCalculatorFactory::class, EstimateCalculatorFactory::class);
     }
 
     /**

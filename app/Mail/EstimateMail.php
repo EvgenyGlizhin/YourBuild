@@ -12,21 +12,21 @@ use Illuminate\Queue\SerializesModels;
 class EstimateMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $estimateData;
+    public array $estimateData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($estimateData)
+    public function __construct(array $estimateData)
     {
         $this->estimateData = $estimateData;
     }
 
-    public function build()
+    public function build() : object
     {
-        return $this->subject('Сообщение от сайта YourBuild')
+        return $this->subject('Смета от сайта YourBuild')
             ->view('emails.estimate');
     }
 }
