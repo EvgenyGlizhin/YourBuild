@@ -33,17 +33,15 @@
                         </li>
                     @endif
                 @else
-                    @if(Auth::user()->is_admin === 1)
-                        <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
-                            <a class="nav-link link-dark" href="{{ route('admin.index') }}">
-                                <h4 class="display-10">Админка</h4>
-                            </a>
-                        </li>
-                    @endif
+                    <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
+                        <a class="nav-link link-dark" href="{{ route('home') }}">
+                            <h5 class="display-10">Вернуться на главную сайта</h5>
+                        </a>
+                    </li>
                     <li class="nav-item mt-md-3">
-                        <h4 class="display-10">
-                            {{ Auth::user()->name }}
-                        </h4>
+                    <h4 class="display-10">
+                        {{ Auth::user()->name }}
+                    </h4>
                     </li>
                     <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
                         <a class="nav-link link-dark" href="{{ route('logout') }}"
@@ -52,6 +50,7 @@
                             <h4 class="display-10">{{ __('Logout') }}</h4>
                         </a>
                     </li>
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

@@ -39,9 +39,20 @@ Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class,
 
 Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 
-Route::get('/calculator', [App\Http\Controllers\CalculatorController::class,'index'])->name('calculator.materials.index');
+Route::get('/calculator', [App\Http\Controllers\CalculatorController::class, 'index'])->name('calculator.materials.index');
 
-Route::post('/calculator', [App\Http\Controllers\CalculatorController::class,'calculate'])->name('calculator.materials.calculate');
+Route::post('/calculator', [App\Http\Controllers\CalculatorController::class, 'calculate'])->name('calculator.materials.calculate');
 
-Route::post('/comment/store', [App\Http\Controllers\CommentController::class,'store'])->name('comment.store');
+Route::post('/comment/store', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
+Route::group(['middleware' => ['auth', 'admin']], function () {
+
+    Route::get('/admin', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/articles', [App\Http\Controllers\Admin\ArticleController::class, 'index'])->name('admin.articles.index');
+    Route::get('/admin/article/{article}', [App\Http\Controllers\Admin\ArticleController::class, 'show'])->name('admin.article.show');
+    Route::get('/admin/article/create', [App\Http\Controllers\Admin\ArticleController::class, 'create'])->name('admin.article.create');
+
+    Route::get('/admin/tag/create', [App\Http\Controllers\Admin\TagController::class, 'create'])->name('admin.tag.create');
+
+
+});
