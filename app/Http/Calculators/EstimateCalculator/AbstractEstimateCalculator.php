@@ -2,7 +2,7 @@
 
 namespace App\Http\Calculators\EstimateCalculator;
 
-abstract class AbstractEstimateCalculator
+abstract class AbstractEstimateCalculator implements InterfaceEstimateCalculator
 {
     // When creating a successor, do not forget to add it to EstimateCalculatorFactory
 

@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmailForSendingMessages extends Model
+class NotificationEmail extends Model
 {
     use HasFactory;
-    protected $table = 'emails_for_sending_messages';
+    use HasFactory;
+    protected $table = 'notification_emails';
     protected $fillable = [
-      'email',
-      'user_id'
+        'email',
+        'user_id'
     ];
 
     public function users()

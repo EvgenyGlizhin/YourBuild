@@ -2,28 +2,29 @@
 
 namespace App\Service;
 
+use App\DTO\EstimateCalculatorDTO;
 use App\Mail\EstimateMail;
-use App\Models\EmailForSendingMessages;
+use App\Models\NotificationEmail;
 use Illuminate\Support\Facades\Mail;
 
 class MailService
 {
-    public function sendEstimateEmail(string $category, float $length, float $width, float $height, string $email, float $resultCalculate, bool $isApprovedEmailSaving)
+    public function sendEstimateEmail(EstimateCalculatorDTO $estimateCalculatorDTO)
     {
         $estimateData = [
-            'category' => $category,
-            'length' => $length,
-            'width' => $width,
-            'height' => $height,
-            'resultCalculate' => $resultCalculate
+            'category' => $estimateCalculatorDTO->category,
+            'length' => $estimateCalculatorDTO->length,
+            'width' => $estimateCalculatorDTO->width,
+            'height' => $estimateCalculatorDTO->height,
+            'resultCalculate' => $estimateCalculatorDTO->resultCalculate
         ];
         try {
-            Mail::to($email)->send(new EstimateMail($estimateData));
+            Mail::to($estimateCalculatorDTO->email)->send(new EstimateMail($estimateData));
 
-            if ($isApprovedEmailSaving === true) {
-                $dataForSaveEmail['email'] = $email;
+            if ($estimateCalculatorDTO->isApprovedEmailSaving === true) {
+                $dataForSaveEmail['email'] = $estimateCalculatorDTO->email;
                 $dataForSaveEmail['user_id'] = auth()->user()->id;
-                EmailForSendingMessages::firstOrCreate($dataForSaveEmail);
+                NotificationEmail::firstOrCreate($dataForSaveEmail);
             }
             return 'Данные успешно отправлены!';
         } catch (\Exception) {

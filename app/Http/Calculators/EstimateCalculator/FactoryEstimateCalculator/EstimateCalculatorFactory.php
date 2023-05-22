@@ -3,6 +3,7 @@
 namespace App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator;
 
 use App\Http\Calculators\EstimateCalculator\AbstractEstimateCalculator;
+use App\Http\Calculators\EstimateCalculator\InterfaceEstimateCalculator;
 use App\Http\Calculators\EstimateCalculator\LaminateEstimate;
 use App\Http\Calculators\EstimateCalculator\PaintCeilingEstimate;
 use App\Http\Calculators\EstimateCalculator\PaintWallEstimate;
@@ -29,7 +30,7 @@ class EstimateCalculatorFactory implements InterfaceCalculatorFactory
         self::TILE_WALL => TileWallsEstimate::class,
     ];
 
-    public function createCalculator(string $category): AbstractEstimateCalculator
+    public function createCalculator(string $category): InterfaceEstimateCalculator
     {
         if (!array_key_exists($category, $this->calculators)) {
             throw new Exception('Calculator not found for category ' . $category);
