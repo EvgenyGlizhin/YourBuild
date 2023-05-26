@@ -28,8 +28,12 @@
                         Калькулятор материалов
                     </a>
                 </div>
-
-
+                <div class="col-4 mt-2">
+                    <a href="{{route('calculator.estimate.index')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                       aria-disabled="true">
+                        Калькулятор сметы
+                    </a>
+                </div>
             </div>
         </div>
     </div>
