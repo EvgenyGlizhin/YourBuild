@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\EstimateCalculatorDTO;
-use App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator\InterfaceCalculatorFactory;
+use App\DTO\SendEstimateMailDTO;
+use App\Http\Calculators\EstimateCalculator\FactoryEstimateCalculator\CalculatorFactoryInterface;
 use App\Http\Requests\Calculator\CalculatorEstimateRequest;
 use App\Service\MailService;
 
@@ -20,20 +20,20 @@ class CalculatorEstimateController extends Controller
         return view('calculators.calculatorEstimate');
     }
 
-    public function calculate(CalculatorEstimateRequest $request, MailService $service, InterfaceCalculatorFactory $factory, EstimateCalculatorDTO $estimateCalculatorDTO)
+    public function calculate(CalculatorEstimateRequest $request, MailService $service, CalculatorFactoryInterface $factory)
     {
-        $estimateCalculatorDTO->length = $request->getLength();
-        $estimateCalculatorDTO->width = $request->getWidth();
-        $estimateCalculatorDTO->height = $request->getHeight();
-        $estimateCalculatorDTO->category = $request->getCategory();
-        $estimateCalculatorDTO->email = $request->getEmail();
-        $estimateCalculatorDTO->isApprovedEmailSaving = $request->isApprovedEmailSaving();
+        $length = $request->getLength();
+        $width = $request->getWidth();
+        $height = $request->getHeight();
+        $category = $request->getCategory();
+        $email = $request->getEmail();
+        $isApprovedEmailSaving = $request->isApprovedEmailSaving();
 
-        $calculator = $factory->createCalculator($estimateCalculatorDTO->category);
-        $resultCalculate = $calculator->calculate($estimateCalculatorDTO->length, $estimateCalculatorDTO->width, $estimateCalculatorDTO->height);
+        $calculator = $factory->createCalculator($category);
+        $resultCalculate = $calculator->calculate($length, $width, $height);
 
-        $estimateCalculatorDTO->resultCalculate = $resultCalculate;
-        $successfulSendMail = $service->sendEstimateEmail($estimateCalculatorDTO);
+        $sendEstimateMailDTO = new SendEstimateMailDTO($length, $width, $height, $category, $email, $resultCalculate, $isApprovedEmailSaving);
+        $successfulSendMail = $service->sendEstimateEmail($sendEstimateMailDTO);
 
         return view('calculators.calculatorEstimate', compact('successfulSendMail'));
     }

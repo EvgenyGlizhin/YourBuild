@@ -2,10 +2,8 @@
 
 namespace App\Http\Calculators\EstimateCalculator;
 
-abstract class AbstractEstimateCalculator implements InterfaceEstimateCalculator
+abstract class AbstractEstimateCalculator implements EstimateCalculatorInterface
 {
-    // When creating a successor, do not forget to add it to EstimateCalculatorFactory
-
     abstract public function getDollarPricePerSquireMeter(): float;
 
     abstract public function calculate(float $length, float $width, float $height): float;

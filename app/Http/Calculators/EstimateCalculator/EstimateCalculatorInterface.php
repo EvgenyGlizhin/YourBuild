@@ -2,8 +2,7 @@
 
 namespace App\Http\Calculators\EstimateCalculator;
 
-interface InterfaceEstimateCalculator
+interface EstimateCalculatorInterface
 {
-    public function getDollarPricePerSquireMeter(): float;
     public function calculate(float $length, float $width, float $height): float;
 }
