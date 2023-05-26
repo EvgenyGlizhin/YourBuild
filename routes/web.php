@@ -39,9 +39,13 @@ Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class,
 
 Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 
-Route::get('/calculator', [App\Http\Controllers\CalculatorController::class,'index'])->name('calculator.materials.index');
+Route::get('/calculator/materials', [App\Http\Controllers\CalculatorMaterialsController::class,'index'])->name('calculator.materials.index');
 
-Route::post('/calculator', [App\Http\Controllers\CalculatorController::class,'calculate'])->name('calculator.materials.calculate');
+Route::post('/calculator/materials', [App\Http\Controllers\CalculatorMaterialsController::class,'calculate'])->name('calculator.materials.calculate');
 
 Route::post('/comment/store', [App\Http\Controllers\CommentController::class,'store'])->name('comment.store');
+
+Route::get('/calculator/estimate', [App\Http\Controllers\CalculatorEstimateController::class,'index'])->name('calculator.estimate.index');
+
+Route::post('/calculator/estimate', [App\Http\Controllers\CalculatorEstimateController::class,'calculate'])->name('calculator.estimate.calculate');
 

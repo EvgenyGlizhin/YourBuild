@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Calculators\MaterialsCalculator;
 use App\Http\Requests\Calculator\CalculatorMaterialsRequest;
 
-class CalculatorController extends Controller
+class CalculatorMaterialsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('calculatorMaterials');
