@@ -19,7 +19,7 @@
                 <span class="m-lg-3">{{$article->created_at->toDateString()}}</span>
                 <img class="" src="{{asset('/storage/uploads/person-circle.svg')}}" alt="">
                 <span class="m-lg-3">{{$article->user->name}}</span> <br>
-                <a class="btn btn-primary m-lg-3" href="{{ URL::to('/articles') }}">Вернуться к статьям</a>
+                <a class="btn btn-primary m-lg-3" href="{{ URL::to('/admin/articles') }}">Вернуться к статьям</a>
             </div>
             <div class="col-10 mt-3">
                 <h2>Комментарии({{$article->comments->count()}})</h2>

@@ -11,9 +11,15 @@
                     </a>
                 </div>
                 <div class="col-4 mt-2">
-                    <a href="{{route('admin.tag.create')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                    <a href="{{route('admin.tag.index')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
                        aria-disabled="true">
-                        Добавить тег
+                        Тэги
+                    </a>
+                </div>
+                <div class="col-4 mt-2">
+                    <a href="{{route('admin.user.index')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                       aria-disabled="true">
+                        Пользователи
                     </a>
                 </div>
             </div>

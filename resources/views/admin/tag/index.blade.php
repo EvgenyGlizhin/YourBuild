@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="col-4 mt-2 mb-4">
-                    <a href="{{route('admin.article.create')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                    <a href="{{route('admin.tag.create')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
                        aria-disabled="true">
-                        Добавить статью
+                        Добавить тэг
                     </a>
                 </div>
                 <div class="col-12">
@@ -23,14 +23,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($articles as $article)
+                                @foreach($tags as $tag)
                                     <tr>
-                                        <td>{{$article->id}}</td>
-                                        <td>{{$article->title}}</td>
-                                        <td><a href="{{route('admin.article.show', $article->id)}}"><h6>Просмотреть</h6></a></td>
-                                        <td><a href="{{route('admin.article.edit', $article->id)}}"><h6>Изменить</h6></a></td>
+                                        <td>{{$tag->id}}</td>
+                                        <td>{{$tag->title}}</td>
+                                        <td><a href="{{route('admin.tag.edit', $tag->id)}}"><h6>Изменить</h6></a></td>
                                         <td>
-                                            <form action="{{route('admin.article.delete', $article->id)}}" method="POST">
+                                            <form action="{{route('admin.tag.delete', $tag->id)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="border-0 bg-transparent">

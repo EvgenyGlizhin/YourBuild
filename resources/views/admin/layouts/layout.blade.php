@@ -17,22 +17,6 @@
     <div class="about">
         <div class="row col-12 bg-secondary">
             <ul class="nav justify-content-end">
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
-                            <a class="nav-link link-dark" href="{{ route('register') }}">
-                                <h4 class="display-10">Log in</h4>
-                            </a>
-                        </li>
-                    @endif
-                    @if (Route::has('register'))
-                        <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
-                            <a class="nav-link link-dark" href="{{ route('login') }}">
-                                <h4 class="display-10">Sing in</h4>
-                            </a>
-                        </li>
-                    @endif
-                @else
                     <li class="nav-item btn btn-primary mb-2 m-lg-2 p-0">
                         <a class="nav-link link-dark" href="{{ route('home') }}">
                             <h5 class="display-10">Вернуться на главную сайта</h5>
@@ -50,11 +34,9 @@
                             <h4 class="display-10">{{ __('Logout') }}</h4>
                         </a>
                     </li>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-                @endguest
             </ul>
         </div>
 
