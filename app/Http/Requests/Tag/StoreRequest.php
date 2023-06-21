@@ -27,4 +27,9 @@ class StoreRequest extends FormRequest
             'title' => ['required', 'unique:tags', 'max:20', 'regex:/^([^0-9]*)$/']
         ];
     }
+
+    public function getTitle(): string
+    {
+        return $this->input('title');
+    }
 }

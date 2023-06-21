@@ -45,10 +45,15 @@
                                 </tbody>
                             </table>
                         </div>
+
                         <!-- /.card-body -->
                     </div>
+
                     <a class="btn btn-primary m-lg-3" href="{{ URL::to('/admin') }}">Вернуться на главную</a>
                     <!-- /.card -->
+                </div>
+                <div class="pagination">
+                    {{ $users->links() }}
                 </div>
             </div>
         </div>

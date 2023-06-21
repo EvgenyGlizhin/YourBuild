@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,7 @@ class StoreRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],
@@ -30,11 +30,11 @@ class StoreRequest extends FormRequest
             'is_admin' => ['required', 'integer']
         ];
     }
-    public function getName()
+    public function getName(): string
     {
         return $this->input('name');
     }
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->input('email');
     }
@@ -44,7 +44,7 @@ class StoreRequest extends FormRequest
         return $this->input('password');
     }
 
-    public function getIsAdmin()
+    public function getIsAdmin(): int
     {
         return $this->input('is_admin');
     }

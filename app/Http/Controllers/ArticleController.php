@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
 use App\Repositories\ArticleRepository;
+use App\Service\ArticleService;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
@@ -16,9 +17,9 @@ class ArticleController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(ArticleRepository $articleRepository)
+    public function index(ArticleService $service, ArticleRepository $repository)
     {
-        $articles = $articleRepository->index();
+        $articles = $service->findArticlesForIndexPage($repository);
         return view('articles.index', ['articles' => $articles]);
     }
 

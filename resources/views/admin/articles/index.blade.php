@@ -48,6 +48,9 @@
                     <a class="btn btn-primary m-lg-3" href="{{ URL::to('/admin') }}">Вернуться на главную</a>
                     <!-- /.card -->
                 </div>
+                <div class="pagination">
+                    {{ $articles->links() }}
+                </div>
             </div>
         </div>
     </div>

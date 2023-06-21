@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\User\StoreRequest;
+use App\DTO\UserAttributesForCreateDTO;
+use App\Http\Requests\User\StoreUserRequest;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use App\Service\UserService;
 
 
 class UserController
 {
-    public function index()
+    public function index(UserService $service, UserRepository $repository)
     {
-        $users = User::all();
+        $users = $service->index($repository);
         return view('admin.user.index', compact('users'));
     }
 
@@ -20,15 +22,22 @@ class UserController
         return view('admin.user.create');
     }
 
-    public function store(StoreRequest $request, UserService $service)
+    public function store(StoreUserRequest $request, UserService $service)
     {
-        $service->store($request);
+        $name = $request->getName();
+        $email = $request->getEmail();
+        $password = $request->getPassword();
+        $isAdmin = $request->getIsAdmin();
+
+        $userAttributesForCreateDTO = new UserAttributesForCreateDTO($name, $email, $password, $isAdmin);
+        $service->store($userAttributesForCreateDTO);
+
         return redirect()->route('admin.user.index');
     }
 
-    public function delete(User $user, UserService $service)
+    public function delete($userId, UserService $service)
     {
-        $service->delete($user);
+        $service->delete($userId);
         return redirect()->route('admin.user.index');
     }
 }

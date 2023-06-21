@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTO\TagAttributesDTO;
 use App\Http\Requests\Tag\StoreRequest;
 use App\Models\Tag;
+use App\Repositories\TagRepository;
 use App\Service\TagService;
 
 class TagController
 {
-    public function index()
+    public function index(TagService $service, TagRepository $repository)
     {
-        $tags = Tag::all();
+        $tags = $service->index($repository);
         return view('admin.tag.index', compact('tags'));
     }
 
@@ -21,7 +23,10 @@ class TagController
 
     public function store(StoreRequest $request, TagService $service)
     {
-        $service->store($request);
+        $title = $request->getTitle();
+        $tagAttributesDTO = new TagAttributesDTO($title);
+        $service->store($tagAttributesDTO);
+
         return redirect()->route('admin.tag.index');
     }
 
@@ -30,16 +35,17 @@ class TagController
         return view('admin.tag.edit', compact('tag'));
     }
 
-    public function update(StoreRequest $request, Tag $tag, TagService $service)
+    public function update($tagId, StoreRequest $request, TagService $service)
     {
-        $elementTagToCreate = $request->validated();
-        $service->update($tag, $elementTagToCreate);
+        $title = $request->getTitle();
+        $elementsTagToUpdateDTO = new TagAttributesDTO($title);
+        $service->update($tagId, $elementsTagToUpdateDTO);
         return redirect()->route('admin.tag.index');
     }
 
-    public function delete(Tag $tag, TagService $service)
+    public function delete($tagId, TagService $service)
     {
-        $service->delete($tag);
+        $service->delete($tagId);
         return redirect()->route('admin.tag.index');
     }
 }

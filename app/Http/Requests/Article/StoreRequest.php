@@ -29,4 +29,17 @@ class StoreRequest extends FormRequest
             'image_url' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2000']
         ];
     }
+
+    public function getTitle(): string
+    {
+        return $this->input('title');
+    }
+    public function getText(): string
+    {
+        return $this->input('text');
+    }
+    public function getImageUrl(): string
+    {
+        return $this->input('image_url');
+    }
 }

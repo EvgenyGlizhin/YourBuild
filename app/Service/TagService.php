@@ -1,23 +1,29 @@
 <?php
 
 namespace App\Service;
+use App\DTO\TagAttributesDTO;
 use App\Models\Tag;
+use App\Repositories\TagRepository;
+use voku\helper\ASCII;
 
 class TagService
 {
-    public function store($request)
+    public function index(TagRepository $repository): object
     {
-        $tagElementsToCreate = $request->validated();
-        Tag::create(['title' => $tagElementsToCreate['title']]);
+        return $repository->findAllTags();
+    }
+    public function store(TagAttributesDTO $tagAttributesDTO): void
+    {
+        Tag::create(['title' => $tagAttributesDTO->getTitle()]);
     }
 
-    public function update($tag, $tagElementsToUpdate)
+    public function update(Tag $tagId, TagAttributesDTO $tagElementsToUpdate): void
     {
-        $tag->update($tagElementsToUpdate);
+        Tag::where('id', $tagId) ->update(['title' => $tagElementsToUpdate->getTitle()]);
     }
 
-    public function delete($tag)
+    public function delete($tagId): void
     {
-        $tag->delete();
+        Tag::where('id', $tagId)->delete();
     }
 }

@@ -18,8 +18,8 @@ class User extends Authenticatable
     const ROLE_ADMIN = 1;
     const ROLE_RIDER = 0;
 
-    public static function getRoles(){
-
+    public static function getRoles(): array
+    {
         return[
             self::ROLE_ADMIN => 'Админ',
             self::ROLE_RIDER => 'Читатель'
