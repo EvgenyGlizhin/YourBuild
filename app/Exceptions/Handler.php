@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Telegram\TelegramBot;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Telegram\Bot\Laravel\Facades\Telegram;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -41,6 +44,24 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
+    protected $telegramBot;
+    public function __construct(Container $container, TelegramBot $telegramBot)
+    {
+        parent::__construct($container);
+        $this->telegramBot = $telegramBot;
+    }
+
+    public function report(Throwable $e)
+    {
+        $errorMessage = [
+          'description' => $e->getMessage(),
+          'file' => $e->getFile(),
+          'line' => $e->getLine()
+        ];
+
+        $this->telegramBot->sendMessage(824166043, (string)view('telegram.report', $errorMessage));
+    }
+
     public function register()
     {
         $this->reportable(function (Throwable $e) {
