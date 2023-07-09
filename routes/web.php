@@ -1,7 +1,13 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Telegram\Bot\Api;
+use Telegram\Bot\FileUpload\InputFile;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +28,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -39,13 +44,13 @@ Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class,
 
 Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 
-Route::get('/calculator/materials', [App\Http\Controllers\CalculatorMaterialsController::class,'index'])->name('calculator.materials.index');
+Route::get('/calculator/materials', [App\Http\Controllers\CalculatorMaterialsController::class, 'index'])->name('calculator.materials.index');
 
-Route::post('/calculator/materials', [App\Http\Controllers\CalculatorMaterialsController::class,'calculate'])->name('calculator.materials.calculate');
+Route::post('/calculator/materials', [App\Http\Controllers\CalculatorMaterialsController::class, 'calculate'])->name('calculator.materials.calculate');
 
-Route::post('/comment/store', [App\Http\Controllers\CommentController::class,'store'])->name('comment.store');
+Route::post('/comment/store', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
-Route::get('/calculator/estimate', [App\Http\Controllers\CalculatorEstimateController::class,'index'])->name('calculator.estimate.index');
+Route::get('/calculator/estimate', [App\Http\Controllers\CalculatorEstimateController::class, 'index'])->name('calculator.estimate.index');
 
-Route::post('/calculator/estimate', [App\Http\Controllers\CalculatorEstimateController::class,'calculate'])->name('calculator.estimate.calculate');
+Route::post('/calculator/estimate', [App\Http\Controllers\CalculatorEstimateController::class, 'calculate'])->name('calculator.estimate.calculate');
 
