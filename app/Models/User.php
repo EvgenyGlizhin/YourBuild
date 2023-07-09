@@ -15,6 +15,17 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
 
+    const ROLE_ADMIN = 1;
+    const ROLE_RIDER = 0;
+
+    public static function getRoles(): array
+    {
+        return[
+            self::ROLE_ADMIN => 'Админ',
+            self::ROLE_RIDER => 'Читатель'
+        ];
+    }
+
     protected $fillable = [
         'name',
         'email',

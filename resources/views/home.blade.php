@@ -17,17 +17,9 @@
                     </div>
                 </div>
                 <div class="col-4 mt-2">
-                    <a href="{{route('tag.create')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+                    <a href="{{route('articles.index')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
                        aria-disabled="true">
-                        Добавить тег
-                    </a>
-                </div>
-
-
-                <div class="col-4 mt-2">
-                    <a href="{{route('article.create')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
-                       aria-disabled="true">
-                        Добавить статью
+                        Посмотреть все статьи
                     </a>
                 </div>
                 <div class="col-4 mt-2">
@@ -36,20 +28,12 @@
                         Калькулятор материалов
                     </a>
                 </div>
-
-                <div class="col-4 mt-2">
-                    <a href="{{route('articles.index')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
-                       aria-disabled="true">
-                        Посмотреть все статьи
-                    </a>
-                </div>
                 <div class="col-4 mt-2">
                     <a href="{{route('calculator.estimate.index')}}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
                        aria-disabled="true">
                         Калькулятор сметы
                     </a>
                 </div>
-
             </div>
         </div>
     </div>

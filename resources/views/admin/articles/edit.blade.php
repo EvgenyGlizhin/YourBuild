@@ -1,16 +1,17 @@
-@extends('layouts.layout')
+@extends('admin.layouts.layout')
 
 @section('content')
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1 class="text-center">Создать статью</h1>
-                <form action="{{route('article.store')}}" method="post" enctype="multipart/form-data">
+                <h1 class="text-center">Редактировать статью</h1>
+                <form action="{{route('admin.article.update', $article->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PATCH')
                     <div class="mb-3">
                         <label for="title" class="form-label">Заголовок статьи</label>
                         <input type="text" name="title" class="form-control" id="title"
-                               placeholder="Введите заголовок статьи">
+                               placeholder="Введите заголовок статьи" value="{{$article->title}}">
                         @error('title')
                         <div class="alert alert-danger mt-3" role="alert">
                             Поле должно быть заполнено, не быть числом и быть не больше
@@ -20,7 +21,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="text" class="form-label">Текст статьи</label>
-                        <textarea class="form-control" name="text" id="text" rows="3"></textarea>
+                        <textarea class="form-control" name="text" id="text" rows="3">{{$article->text}}</textarea>
                         @error('text')
                         <div class="alert alert-danger mt-3" role="alert">
                             Поле должно быть заполнено и быть не больше
@@ -30,8 +31,8 @@
                     </div>
                     <div>
                         <div class="mb-2 d-flex justify-content-center">
-                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
-                                 alt="example placeholder" style="width: 150px;"/>
+                            <img src="{{url('storage/' . $article->image_url)}}"
+                                 alt="" style="width: 450px;"/>
                         </div>
                         <label class="form-label" for="image_url">Вы можете добавить картинку</label>
                         <input type="file" name="image_url" class="form-control" id="image_url"/>
