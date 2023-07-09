@@ -2,6 +2,8 @@
 
 namespace App\Http\Calculators;
 
+use App\VO\RoomDimensionsVO;
+
 class MaterialsCalculator
 {
     private const BAND_WALL_PAPER_IN_ROLL_WITH_IMAGE = 3;
@@ -10,40 +12,37 @@ class MaterialsCalculator
     private const KG_PAINT_ONE_SQUARE_METER = 0.185;
     private const MATERIALS_RESERVE_PERCENT = 10;
 
-    public function calculate(float $length, float $width, float $height, string $category) : float
+    public function calculate(RoomDimensionsVO $dimensionsVO, string $category) : float
     {
-        $lengthWalls = ($length + $width) * 2;
-        $floorArea = $length * $width;
-        $wallsArea = $lengthWalls * $height;
 
         if($category === 'wallPaper'){
-            $rollsWallPaperWithoutSelection = $lengthWalls / self::BAND_WALL_PAPER_IN_ROLL_WITHOUT_IMAGE;
+            $rollsWallPaperWithoutSelection = $dimensionsVO->getLengthWalls() / self::BAND_WALL_PAPER_IN_ROLL_WITHOUT_IMAGE;
             $finishCalculation = ceil($rollsWallPaperWithoutSelection);
         }
         if($category === 'wallPaperWithSelection'){
-            $rollsWallPaperSelection = $lengthWalls / self::BAND_WALL_PAPER_IN_ROLL_WITH_IMAGE;
+            $rollsWallPaperSelection = $dimensionsVO->getLengthWalls() / self::BAND_WALL_PAPER_IN_ROLL_WITH_IMAGE;
             $finishCalculation = ceil($rollsWallPaperSelection);
         }
         if($category === 'laminate'){
-            $quantityOfLaminateWithoutReserve = $floorArea / self::AREA_ONE_BORD_LAMINATE;
+            $quantityOfLaminateWithoutReserve = $dimensionsVO->getFloorArea() / self::AREA_ONE_BORD_LAMINATE;
             $necessaryReserveOfLaminate = self::calculationNecessaryReserveToPerformTheWork($quantityOfLaminateWithoutReserve);
             $finishCalculation = ceil($quantityOfLaminateWithoutReserve + $necessaryReserveOfLaminate);
         }
         if($category === 'paintCeiling'){
-            $paintForCeiling = $floorArea * self::KG_PAINT_ONE_SQUARE_METER;
+            $paintForCeiling = $dimensionsVO->getFloorArea() * self::KG_PAINT_ONE_SQUARE_METER;
             $finishCalculation = ceil($paintForCeiling);
         }
         if($category === 'paintWall'){
-            $paintForWall = $wallsArea * self::KG_PAINT_ONE_SQUARE_METER;
+            $paintForWall = $dimensionsVO->getWallsArea() * self::KG_PAINT_ONE_SQUARE_METER;
             $finishCalculation = ceil($paintForWall);
         }
         if($category === 'tileFloor'){
-            $necessaryReserveTileFloor = self::calculationNecessaryReserveToPerformTheWork($floorArea);
-            $finishCalculation = ceil($floorArea + $necessaryReserveTileFloor);
+            $necessaryReserveTileFloor = self::calculationNecessaryReserveToPerformTheWork($dimensionsVO->getFloorArea());
+            $finishCalculation = ceil($dimensionsVO->getFloorArea() + $necessaryReserveTileFloor);
         }
         if($category === 'tileWall'){
-            $necessaryReserveTileWalls = self::calculationNecessaryReserveToPerformTheWork($wallsArea);
-            $finishCalculation = ceil($wallsArea + $necessaryReserveTileWalls);
+            $necessaryReserveTileWalls = self::calculationNecessaryReserveToPerformTheWork($dimensionsVO->getWallsArea());
+            $finishCalculation = ceil($dimensionsVO->getWallsArea() + $necessaryReserveTileWalls);
         }
         return $finishCalculation;
     }

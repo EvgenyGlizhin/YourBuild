@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Calculators\MaterialsCalculator;
 use App\Http\Requests\Calculator\CalculatorMaterialsRequest;
+use App\VO\RoomDimensionsVO;
 
 class CalculatorMaterialsController extends Controller
 {
@@ -23,7 +24,9 @@ class CalculatorMaterialsController extends Controller
         $width = $request->getWidth();
         $height = $request->getHeight();
         $category = $request->getCategory();
-        $resultCalculate = $calculator->calculate($length, $width, $height, $category);
+
+        $roomDimensionsVO = new RoomDimensionsVO($length, $width, $height);
+        $resultCalculate = $calculator->calculate($roomDimensionsVO, $category);
 
         return response()->json(['category' => $category, 'resultCalculate' => $resultCalculate]);
     }
